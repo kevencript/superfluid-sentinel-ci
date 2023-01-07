@@ -1,0 +1,22 @@
+name: Terraform Plan
+
+on:
+  push:
+    branches:
+      - "*"
+      - "!main"
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.13.5
+
+      - name: Plan
+        run: terraform plan -out=tfplan-superfluid
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SUPERFLUID_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SUPERFLUID_AWS_SECRET_ACCESS_KEY }}
