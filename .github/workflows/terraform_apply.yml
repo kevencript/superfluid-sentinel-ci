@@ -14,6 +14,9 @@ jobs:
         with:
           terraform_version: 0.13.5
 
+      - name: Initialize Terraform
+        run: terraform init
+
       - name: Apply
         run: terraform apply tfplan-superfluid
         env:
