@@ -103,7 +103,7 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_internet_gateway" "gateway" {
-  vpc_id = aws_vpc.default.id
+  vpc_id = var.vpc_id
 }
 
 resource "aws_route" "internet_access" {
