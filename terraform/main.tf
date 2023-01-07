@@ -29,8 +29,9 @@ module "superfluid_ecs" {
   enable_container_insights = true
   create_load_balancer      = true
 
-  vpc_id   = module.superfluid_vpc.vpc_id
-  vpc_cidr = var.vpc_cidr
+  vpc_main_route_table_id = module.superfluid_vpc.vpc_main_route_table_id
+  vpc_id                  = module.superfluid_vpc.vpc_id
+  vpc_cidr                = var.vpc_cidr
 
   tags = var.tags
 }
