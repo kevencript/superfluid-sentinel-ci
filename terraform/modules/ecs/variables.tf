@@ -58,9 +58,3 @@ variable "vpc_id" {
   default     = ""
   description = "(Optional) The VPC ID. It is required if \"create_load_balancer\" is \"true\"."
 }
-
-variable "public_subnet_ids" {
-  type        = list(string)
-  default     = []
-  description = "(Optional) A list of Public Subnet IDs. It is required if \"create_load_balancer\" is \"true\"."
-}

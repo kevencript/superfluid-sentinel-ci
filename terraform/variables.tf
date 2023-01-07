@@ -35,12 +35,6 @@ variable "environ" {
   }
 }
 
-variable "public_subnet_ids" {
-  type        = list(string)
-  default     = ["subnet-002b5423", "subnet-0e0dbd33"]
-  description = "(Optional) A list of Public Subnet IDs. It is required if \"create_load_balancer\" is \"true\"."
-}
-
 variable "tags" {
   type        = map(string)
   default     = {}

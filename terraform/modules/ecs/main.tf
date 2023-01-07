@@ -86,6 +86,10 @@ module "this_app_security_group" {
   tags = merge(var.tags, local.tags)
 }
 
+data "aws_subnet_ids" "superfluid_subnets" {
+  vpc_id = var.vpc_id
+}
+
 module "this_alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 5.9"
@@ -97,7 +101,7 @@ module "this_alb" {
   load_balancer_type = "application"
 
   vpc_id          = var.vpc_id
-  subnets         = var.public_subnet_ids
+  subnets         = data.aws_subnet_ids.superfluid_subnets.ids
   security_groups = [module.this_alb_security_group[0].this_security_group_id]
 
   target_groups = [{
