@@ -13,9 +13,13 @@ module "s3_bucket" {
 # Configure the Terraform backend
 terraform {
   backend "s3" {
-    bucket = "${module.s3_bucket.bucket_name}"
-    key    = "terraform.tfstate"
-    region = "${module.s3_bucket.region}"
+    bucket = local.bucket_name
+    region = local.region
   }
+}
+
+locals {
+  bucket_name = "${module.s3_bucket.bucket_name}"
+  region         = "${module.s3_bucket.region}" 
 }
 
