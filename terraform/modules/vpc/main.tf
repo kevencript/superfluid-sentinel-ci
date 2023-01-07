@@ -6,5 +6,5 @@ resource "aws_vpc" "superfluid-ecs-vpc" {
 }
 
 output "vpc_id" {
-  value = aws_vpc.vpc.id
+  value = aws_vpc.superfluid-ecs-vpc.id
 }
