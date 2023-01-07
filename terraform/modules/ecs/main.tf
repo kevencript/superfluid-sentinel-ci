@@ -86,11 +86,20 @@ module "this_app_security_group" {
   tags = merge(var.tags, local.tags)
 }
 
-data "aws_subnets" "all" {
-  filter {
-    name   = "vpc-id"
-    values = [var.vpc_id]
-  }
+# Subnet and Internet Gateway 
+resource "aws_subnet" "public" {
+  count                   = 2
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, 2 + count.index)
+  availability_zone       = data.aws_availability_zones.available_zones.names[count.index]
+  vpc_id                  = var.vpc_id
+  map_public_ip_on_launch = true
+}
+
+resource "aws_subnet" "private" {
+  count             = 2
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index)
+  availability_zone = data.aws_availability_zones.available_zones.names[count.index]
+  vpc_id            = var.vpc_id
 }
 
 module "this_alb" {
@@ -104,7 +113,7 @@ module "this_alb" {
   load_balancer_type = "application"
 
   vpc_id          = var.vpc_id
-  subnets         = data.aws_subnets.all.ids
+  subnets         = element(aws_subnet.public.*.id, count.index)
   security_groups = [module.this_alb_security_group[0].this_security_group_id]
 
   target_groups = [{

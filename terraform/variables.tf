@@ -40,3 +40,4 @@ variable "tags" {
   default     = {}
   description = "(Optional) Key-value map of resource tags."
 }
+

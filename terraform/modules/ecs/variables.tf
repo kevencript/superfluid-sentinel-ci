@@ -57,3 +57,11 @@ variable "vpc_id" {
   type        = string
   description = "(Optional) The VPC ID. It is required if \"create_load_balancer\" is \"true\"."
 }
+
+data "aws_availability_zones" "available_zones" {
+  state = "available"
+}
+
+variable "vpc_cidr" {
+  type        = string
+}
