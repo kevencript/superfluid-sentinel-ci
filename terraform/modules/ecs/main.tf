@@ -113,7 +113,7 @@ module "this_alb" {
   load_balancer_type = "application"
 
   vpc_id          = var.vpc_id
-  subnets         = element(aws_subnet.public.*.id, count.index)
+  subnets         = aws_subnet.public.*.id
   security_groups = [module.this_alb_security_group[0].this_security_group_id]
 
   target_groups = [{
