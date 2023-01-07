@@ -63,5 +63,9 @@ data "aws_availability_zones" "available_zones" {
 }
 
 variable "vpc_cidr" {
-  type        = string
+  type = string
+}
+
+variable "vpc_main_route_table_id" {
+  type = string
 }
