@@ -6,7 +6,7 @@ provider "aws" {
 
 # Create the S3 bucket
 module "s3_bucket" {
-  source  = "./s3-bucket"
+  source  = "./modules/s3-bucket"
   name    = "${var.s3_bucket_name}"
 }
 
