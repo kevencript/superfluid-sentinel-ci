@@ -6,7 +6,7 @@ resource "aws_vpc" "superfluid_ecs_vpc" {
 }
 
 output "vpc_id" {
-  value = aws_vpc.superfluid-ecs-vpc.id
+  value = aws_vpc.superfluid_ecs_vpc.id
 }
 
 output "vpc_main_route_table_id" {
