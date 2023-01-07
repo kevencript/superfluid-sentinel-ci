@@ -9,5 +9,4 @@ variable "vpc_cidr" {
 variable "vpc_name" {
   description = "VPC name"
   type        = string
-  default     = "superfluid-ecs-vpc"
 }
