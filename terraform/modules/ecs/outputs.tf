@@ -18,6 +18,3 @@ output "this_lb_dns" {
   description = "DNS name of the AWS ALB (Application Load Balancer)."
 }
 
-output "subnet_ids" {
-  value = data.aws_subnets.superfluid_subnets.ids
-}
