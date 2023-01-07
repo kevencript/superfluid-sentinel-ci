@@ -6,7 +6,7 @@ module "superfluid_vpc" {
 }
 
 module "superfluid_ecs" {
-  source = "/modules/ecs"
+  source = "./modules/ecs"
 
   name    = var.name
   environ = var.environ

@@ -35,11 +35,6 @@ variable "environ" {
   }
 }
 
-variable "vpc_id" {
-  type        = string
-  description = "(Optional) The VPC ID. It is required if \"create_load_balancer\" is \"true\"."
-}
-
 variable "public_subnet_ids" {
   type        = list(string)
   default     = ["subnet-002b5423", "subnet-0e0dbd33"]
