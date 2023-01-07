@@ -1,22 +1,8 @@
-provider "aws" {
-  access_key = "${var.aws_access_key}"
-  secret_key = "${var.aws_secret_key}"
-  region     = "us-east-1"
-}
-
-# Create the S3 bucket
-module "s3_bucket" {
-  source  = "./modules/s3-bucket"
-  name    = "${var.s3_bucket_name}"
-}
-
-# Configure the Terraform backend
-terraform {
-  backend "s3" {
-    bucket = "tfstate"
-    region = "US-East"
+resource "aws_vpc" "superfluid_ecs_vpc" {
+  cidr_block = "10.0.0.0/16"
+  enable_dns_support = true
+  enable_dns_hostnames = true
+  tags = {
+    Name = "superfluid-ecs-vpc"
   }
 }
-
-
-
