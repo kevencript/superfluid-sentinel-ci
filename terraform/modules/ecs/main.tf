@@ -16,7 +16,9 @@ resource "random_string" "cluster" {
   }
 }
 
-resource "aws_ecs_cluster" "this" {
+#################
+## ECS Cluster ##
+resource "aws_ecs_cluster" "superfluid_ecs_cluster" {
   name = "${random_string.cluster.keepers.name}-${random_string.cluster.keepers.environ}-${random_string.cluster.id}"
 
   capacity_providers = var.capacity_providers
@@ -43,7 +45,40 @@ resource "aws_ecs_cluster" "this" {
   }
 }
 
-module "this_alb_security_group" {
+###############################
+## Application Load Balancer ##
+module "superfluid_alb" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "~> 5.9"
+
+  count = var.create_load_balancer ? 1 : 0
+
+  name = "${substr(random_string.cluster.keepers.name, 0, 12)}-${substr(random_string.cluster.keepers.environ, 0, 12)}-${random_string.cluster.id}"
+
+  load_balancer_type = "application"
+
+  vpc_id          = var.vpc_id
+  subnets         = aws_subnet.public.*.id
+  security_groups = [module.superfluid_alb_security_group[0].this_security_group_id]
+
+  target_groups = [{
+    target_type      = "ip"
+    backend_protocol = "HTTP"
+    backend_port     = 80
+  }]  
+
+  http_tcp_listeners = [{
+    port     = 80
+    protocol = "HTTP"
+  }]
+
+  tags = merge(var.tags, local.tags)
+}
+
+
+#####################
+## Security Groups ##
+module "superfluid_alb_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.16"
 
@@ -62,7 +97,7 @@ module "this_alb_security_group" {
   tags = merge(var.tags, local.tags)
 }
 
-module "this_app_security_group" {
+module "superfluid_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.16"
 
@@ -75,7 +110,7 @@ module "this_app_security_group" {
 
   computed_ingress_with_source_security_group_id = var.create_load_balancer ? [{
     rule                     = "http-80-tcp"
-    source_security_group_id = module.this_alb_security_group[0].this_security_group_id
+    source_security_group_id = module.superfluid_alb_security_group[0].this_security_group_id
   }] : []
 
   number_of_computed_ingress_with_source_security_group_id = var.create_load_balancer ? 1 : 0
@@ -86,7 +121,9 @@ module "this_app_security_group" {
   tags = merge(var.tags, local.tags)
 }
 
-# Subnet and Internet Gateway 
+
+#############
+## Subnets ##
 resource "aws_subnet" "public" {
   count                   = 2
   cidr_block              = cidrsubnet(var.vpc_cidr, 8, 2 + count.index)
@@ -102,36 +139,9 @@ resource "aws_subnet" "private" {
   vpc_id            = var.vpc_id
 }
 
-module "this_alb" {
-  source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.9"
 
-  count = var.create_load_balancer ? 1 : 0
-
-  name = "${substr(random_string.cluster.keepers.name, 0, 12)}-${substr(random_string.cluster.keepers.environ, 0, 12)}-${random_string.cluster.id}"
-
-  load_balancer_type = "application"
-
-  vpc_id          = var.vpc_id
-  subnets         = aws_subnet.public.*.id
-  security_groups = [module.this_alb_security_group[0].this_security_group_id]
-
-  target_groups = [{
-    target_type      = "ip"
-    backend_protocol = "HTTP"
-    backend_port     = 80
-  }]  
-
-  http_tcp_listeners = [{
-    port     = 80
-    protocol = "HTTP"
-  }]
-
-  tags = merge(var.tags, local.tags)
-}
-
-## Internet Gateway
-
+######################
+## Internet Gateway ##
 resource "aws_internet_gateway" "gateway" {
   vpc_id = var.vpc_id
 }
