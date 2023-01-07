@@ -86,7 +86,7 @@ module "this_app_security_group" {
   tags = merge(var.tags, local.tags)
 }
 
-data "aws_subnet_ids" "superfluid_subnets" {
+data "aws_subnets" "superfluid_subnets" {
   vpc_id = var.vpc_id
 }
 

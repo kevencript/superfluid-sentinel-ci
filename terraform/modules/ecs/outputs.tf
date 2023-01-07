@@ -19,5 +19,5 @@ output "this_lb_dns" {
 }
 
 output "subnet_ids" {
-  value = data.aws_subnet_ids.superfluid_subnets.ids
+  value = data.aws_subnets.superfluid_subnets.ids
 }
