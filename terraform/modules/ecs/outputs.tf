@@ -17,3 +17,4 @@ output "this_lb_dns" {
   value       = var.create_load_balancer ? module.this_alb[0].this_lb_dns_name : null
   description = "DNS name of the AWS ALB (Application Load Balancer)."
 }
+

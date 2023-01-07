@@ -30,7 +30,6 @@ module "superfluid_ecs" {
   create_load_balancer      = true
 
   vpc_id            = module.superfluid_vpc.vpc_id
-  public_subnet_ids = var.public_subnet_ids
 
   tags = var.tags
 }
