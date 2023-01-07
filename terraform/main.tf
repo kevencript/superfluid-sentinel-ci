@@ -29,7 +29,7 @@ module "superfluid_ecs" {
   enable_container_insights = true
   create_load_balancer      = true
 
-  vpc_id            = var.vpc_id
+  vpc_id            = module.superfluid_vpc.vpc_id
   public_subnet_ids = var.public_subnet_ids
 
   tags = var.tags

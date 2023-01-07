@@ -37,7 +37,6 @@ variable "environ" {
 
 variable "vpc_id" {
   type        = string
-  default     = module.superfluid_vpc.vpc_id
   description = "(Optional) The VPC ID. It is required if \"create_load_balancer\" is \"true\"."
 }
 
