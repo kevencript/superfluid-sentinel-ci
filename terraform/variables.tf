@@ -40,3 +40,7 @@ variable "tags" {
   default     = {}
   description = "(Optional) Key-value map of resource tags."
 }
+
+data "aws_availability_zones" "available_zones" {
+  state = "available"
+}
