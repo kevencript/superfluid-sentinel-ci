@@ -61,3 +61,7 @@ variable "vpc_id" {
 data "aws_availability_zones" "available_zones" {
   state = "available"
 }
+
+variable "vpc_cidr" {
+  type        = string
+}
