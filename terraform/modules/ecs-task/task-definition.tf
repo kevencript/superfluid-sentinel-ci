@@ -37,7 +37,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     },
     "mountPoints": [
       {
-        "sourceVolume": "data",
+        "sourceVolume": "/var/lib/docker/volumes/data",
         "containerPath": "/app/data",
         "readOnly": false
       }
