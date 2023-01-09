@@ -13,6 +13,6 @@ output "alb_security_group" {
 }
 
 output "private_subnet_ids" {
-  value       = aws_subnet.private.*.id
+  value       = aws_subnet.private[*].id
   description = "List of private subnets ID's"
 }

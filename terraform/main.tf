@@ -39,6 +39,10 @@ module "superfluid_ecs" {
 module "superfluid_ecs_task" {
   source = "./modules/ecs-task"
 
+  depends_on = [
+    module.superfluid_ecs
+  ]
+
   vpc_id               = module.superfluid_vpc.vpc_id
   name                 = var.name
   ecs_cluster_id       = module.superfluid_ecs.ecs_cluster_id
