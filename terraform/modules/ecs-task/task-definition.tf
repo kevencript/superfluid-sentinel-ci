@@ -7,7 +7,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
 
   volume {
       name       = "superfluid-data"
-      sourcePath =  "/ecs/superfluid-data"
+      host_path   = "/ecs/superfluid-data-storage"
   }
 
  container_definitions = <<DEFINITION
