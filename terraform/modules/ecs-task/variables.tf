@@ -19,12 +19,11 @@ variable "alb_security_group" {
 }
 
 variable "alb_target_group_arn" {
-  type        = string
   description = "ALB Target group ARN"
 }
 
 variable "private_subnet_ids" {
-  type        = string
+  type        = list
   description = "Private subnets id"
 }
 
