@@ -7,7 +7,7 @@ resource "aws_ecs_service" "superfluid_sentinek_svc" {
 
   network_configuration {
     security_groups = [aws_security_group.superfluid_sentinel_task.id]
-    subnets         = [var.private_subnet_ids]
+    subnets         = data.aws_subnet_ids.superfluid.ids
   }
 
   load_balancer {
@@ -15,4 +15,8 @@ resource "aws_ecs_service" "superfluid_sentinek_svc" {
     container_name   = "${var.name}-sentinel"
     container_port   = var.port
   }
+}
+
+data "aws_subnet_ids" "superfluid" {
+  vpc_id = var.vpc_id
 }
