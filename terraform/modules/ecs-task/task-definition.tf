@@ -1,5 +1,5 @@
 resource "aws_ecs_task_definition" "superfluid_sentinel" {
-  family                   = "${var.name}-sentinel"
+  family                   = "${var.name}-definition"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 1024
