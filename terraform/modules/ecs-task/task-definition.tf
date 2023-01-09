@@ -24,6 +24,13 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
         "value": "data/db.sqlite"
       }
     ],
+    "volumes": [
+      {        
+        "name": "data",       
+         "host": {          
+          "sourcePath": "data" 
+        }       
+      }],
     "mountPoints": [
       {
         "sourceVolume": "data",
