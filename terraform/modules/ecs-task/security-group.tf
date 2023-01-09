@@ -1,5 +1,5 @@
 resource "aws_security_group" "superfluid_sentinel_task" {
-  name        = "${var.name}-${var.environ}-task-sg"
+  name        = "${var.name}-task-sg"
   vpc_id      = var.vpc_id
 
   ingress {
