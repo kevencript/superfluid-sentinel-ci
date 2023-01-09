@@ -12,13 +12,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     "cpu": 1024,
     "memory": 2048,
     "name": "superfluid-sentinel",
-    "networkMode": "awsvpc",
-    "portMappings": [
-      {
-        "containerPort": 3000,
-        "hostPort": 3000
-      }
-    ]
+    "networkMode": "awsvpc"
   }
 ]
 DEFINITION

@@ -49,5 +49,5 @@ module "superfluid_ecs_task" {
   alb_security_group   = module.superfluid_ecs.alb_security_group
   alb_target_group_arn = module.superfluid_ecs.alb_target_group_arn
   port                 = 3000
-  app_count            = 2
+  app_count            = 1
 }
