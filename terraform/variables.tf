@@ -12,10 +12,9 @@ variable "vpc_name" {
 
 }
 
-# ECS Variables
 variable "name" {
   type        = string
-  default     = "superfluid-ecs"
+  default     = "superfluid-sentinel"
   description = "Name of the application. It will be used to name the resources of this module."
 
   validation {
@@ -23,6 +22,8 @@ variable "name" {
     error_message = "\"name\" can only contains lower case letter and hyphens."
   }
 }
+
+# ECS Variables
 
 variable "environ" {
   type        = string

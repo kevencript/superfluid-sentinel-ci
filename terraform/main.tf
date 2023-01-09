@@ -35,3 +35,19 @@ module "superfluid_ecs" {
 
   tags = var.tags
 }
+
+module "superfluid_ecs_task" {
+  source = "./modules/ecs-task"
+
+  depends_on = [
+    module.superfluid_ecs
+  ]
+
+  vpc_id               = module.superfluid_vpc.vpc_id
+  name                 = var.name
+  ecs_cluster_id       = module.superfluid_ecs.ecs_cluster_id
+  alb_security_group   = module.superfluid_ecs.alb_security_group
+  alb_target_group_arn = module.superfluid_ecs.alb_target_group_arn
+  port                 = 3000
+  app_count            = 2
+}
