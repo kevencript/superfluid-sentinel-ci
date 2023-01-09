@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
  container_definitions = <<DEFINITION
 [
   {
-    "image": "logicb0x/superfluid-sentinel",
+    "image": "registry.gitlab.com/architect-io/artifacts/nodejs-hello-world:latest",
     "cpu": 1024,
     "memory": 2048,
     "name": "superfluid-sentinel",
