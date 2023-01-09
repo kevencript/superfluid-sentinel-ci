@@ -46,4 +46,5 @@ module "superfluid_ecs_task" {
   alb_target_group_arn = module.superfluid_ecs.alb_target_group_arn
   private_subnet_ids   = module.superfluid_ecs.private_subnet_ids
   port                 = 3000
+  app_count            = 2
 }

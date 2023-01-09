@@ -33,3 +33,9 @@ variable "port" {
   description = "Port"
   default     = 3000
 }
+
+variable "app_count" {
+  type        = string
+  description = "Port"
+  default     = 3000
+}
