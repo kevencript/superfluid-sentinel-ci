@@ -18,7 +18,7 @@ resource "random_string" "cluster" {
 
 #################
 ## ECS Cluster ##
-resource "aws_ecs_cluster" "superfluid_ecs_cluster" {
+resource "aws_ecs_cluster" "superfluid_ecs_cluster_main" {
   name = "${random_string.cluster.keepers.name}-${random_string.cluster.keepers.environ}-${random_string.cluster.id}"
 
   capacity_providers = var.capacity_providers

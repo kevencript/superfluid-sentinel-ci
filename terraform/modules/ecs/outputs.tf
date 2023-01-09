@@ -1,5 +1,5 @@
 output "ecs_cluster_id" {
-  value = aws_ecs_cluster.superfluid_ecs_cluster.id
+  value = aws_ecs_cluster.superfluid_ecs_cluster_main.id
 }
 
 output "alb_target_group_arn" {

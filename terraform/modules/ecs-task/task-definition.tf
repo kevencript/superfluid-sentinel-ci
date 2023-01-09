@@ -6,13 +6,13 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
   memory                   = 2048
 
   volume {
-      name       = "superfluid-data"
+      name       = "data"
   }
 
  container_definitions = <<DEFINITION
 [
   {
-    "image": "docker.io/gabrielobcosta/superfluid-sentinel-sentinel:0.0.1",
+    "image": "docker.io/gabrielobcosta/superfluid-sentinel:0.0.1",
     "cpu": 1024,
     "memory": 2048,
     "name": "superfluid-sentinel",
@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     ],
     "mountPoints": [
       {
-        "sourceVolume": "superfluid-data",
+        "sourceVolume": "data",
         "containerPath": "/app/data",
         "readOnly": false
       }
