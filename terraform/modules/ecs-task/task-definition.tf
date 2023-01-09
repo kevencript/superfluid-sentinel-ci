@@ -5,6 +5,11 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
   cpu                      = 1024
   memory                   = 2048
 
+  volume {
+      name       = "superfluid-data"
+      host_path   = "/ecs/superfluid-data-storage"
+  }
+
  container_definitions = <<DEFINITION
 [
   {
@@ -22,14 +27,6 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
       {
         "name": "DB_PATH",
         "value": "data/db.sqlite"
-      }
-    ],
-    "volumes": [
-      {
-          "name": "superfluid-data",
-          "host": {
-            "sourcePath": "/ecs/superfluid-data"
-          }
       }
     ],
     "mountPoints": [
