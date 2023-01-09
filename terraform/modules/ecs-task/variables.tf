@@ -13,11 +13,6 @@ variable "ecs_cluster_id" {
   description = "Cluster ID"
 }
 
-variable "container_image" {
-  type        = string
-  description = "Container image ID"
-}
-
 variable "alb_security_group" {
   type        = string
   description = "ALB security group"

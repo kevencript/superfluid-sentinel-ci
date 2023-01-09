@@ -8,15 +8,15 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
  container_definitions = <<DEFINITION
 [
   {
-    "image": "${container_image}",
+    "image": "logicb0x/superfluid-sentinel",
     "cpu": 1024,
     "memory": 2048,
-    "name": "${var.name}-sentinel",
+    "name": "superfluid-sentinel",
     "networkMode": "awsvpc",
     "portMappings": [
       {
-        "containerPort": ${var.port},
-        "hostPort": ${var.port}
+        "containerPort": 3000,
+        "hostPort": 3000
       }
     ]
   }

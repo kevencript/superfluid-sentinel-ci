@@ -3,7 +3,7 @@ output "ecs_cluster_id" {
 }
 
 output "alb_target_group_arn" {
-  value       = module.superfluid_alb[0].this_target_group.arn
+  value       = module.superfluid_alb[0].target_groups[0].arn
   description = "Alb Target Group ARN"
 }
 
