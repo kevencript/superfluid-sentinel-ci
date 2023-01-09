@@ -11,7 +11,7 @@ resource "aws_ecs_service" "superfluid_sentinek_svc" {
   }
 
   load_balancer {
-    target_group_arn = var.alb_target_group_arn
+    target_group_arn = var.alb_target_group_arn[0]
     container_name   = "${var.name}-sentinel"
     container_port   = var.port
   }
