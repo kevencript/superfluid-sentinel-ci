@@ -12,7 +12,25 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     "cpu": 1024,
     "memory": 2048,
     "name": "superfluid-sentinel",
-    "networkMode": "awsvpc"
+    "networkMode": "awsvpc",
+    "essential": true,
+    "environment": [
+      {
+        "name": "NODE_ENV",
+        "value": "production"
+      },
+      {
+        "name": "DB_PATH",
+        "value": "data/db.sqlite"
+      }
+    ],
+    "mountPoints": [
+      {
+        "sourceVolume": "data",
+        "containerPath": "/app/data",
+        "readOnly": false
+      }
+    ]
   }
 ]
 DEFINITION
