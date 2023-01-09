@@ -22,11 +22,6 @@ variable "alb_target_group_arn" {
   description = "ALB Target group ARN"
 }
 
-variable "private_subnet_ids" {
-  type        = list
-  description = "Private subnets id"
-}
-
 variable "port" {
   type        = string
   description = "Port"
