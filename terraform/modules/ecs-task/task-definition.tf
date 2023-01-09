@@ -15,8 +15,8 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     "networkMode": "awsvpc",
     "portMappings": [
       {
-        "containerPort": 0,
-        "hostPort": 0
+        "containerPort": 3000,
+        "hostPort": 3000
       }
     ]
   }

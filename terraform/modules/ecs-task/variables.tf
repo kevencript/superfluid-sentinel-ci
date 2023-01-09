@@ -26,7 +26,7 @@ variable "alb_target_group_arn" {
 variable "port" {
   type        = string
   description = "Port"
-  default     = 0
+  default     = 3000
 }
 
 variable "app_count" {
