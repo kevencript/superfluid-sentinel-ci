@@ -29,6 +29,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
           "name": "superfluid-data",
           "host": {
             "sourcePath": "/ecs/superfluid-data"
+          }
       }
     ],
     "mountPoints": [
