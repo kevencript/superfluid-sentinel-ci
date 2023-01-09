@@ -35,3 +35,16 @@ module "superfluid_ecs" {
 
   tags = var.tags
 }
+
+module "superfluid_ecs_task" {
+  source = "./modules/ecs-task"
+
+  vpc_id               = module.superfluid_vpc.vpc_id
+  name                 = var.name
+  ecs_cluster_id       = module.superfluid_ecs.ecs_cluster_id
+  container_image      = "logicb0x/superfluid-sentinel" 
+  alb_security_group   = module.superfluid_ecs.alb_security_group
+  alb_target_group_arn = module.superfluid_ecs.alb_target_group_arn
+  private_subnet_ids   = module.superfluid_ecs.private_subnet_ids
+  port                 = 3000
+}
