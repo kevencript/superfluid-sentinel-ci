@@ -8,7 +8,7 @@ output "alb_target_group_arn" {
 }
 
 output "alb_security_group" {
-  value       = module.superfluid_alb_security_group[0].security_group_id
+  value       = module.superfluid_alb_security_group[0].this_security_group_id
   description = "Alb Target Group ARN"
 }
 
