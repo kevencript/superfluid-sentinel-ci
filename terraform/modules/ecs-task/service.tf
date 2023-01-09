@@ -1,4 +1,4 @@
-resource "aws_ecs_service" "superfluid_sentinel_svc" {
+resource "aws_ecs_service" "superfluid_sentinel_service" {
   name            = "${var.name}-service"
   cluster         = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.superfluid_sentinel.arn
