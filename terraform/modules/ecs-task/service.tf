@@ -1,5 +1,5 @@
 resource "aws_ecs_service" "superfluid_sentinel_service" {
-  name            = "${var.name}-service"
+  name            = "${var.name}-svc"
   cluster         = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.superfluid_sentinel.arn
   desired_count   = var.app_count 
