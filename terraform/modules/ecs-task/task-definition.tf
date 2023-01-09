@@ -24,13 +24,17 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
         "value": "data/db.sqlite"
       }
     ],
-    "volumes": [
-      {        
-        "name": "data",       
-         "host": {          
-          "sourcePath": "data" 
-        }       
-      }],
+    "dockerVolumeConfiguration": {
+      "scope": "shared",
+      "autoprovision": false,
+      "driver": "local",
+      "driverOpts": {
+        "type": "none",
+        "o": "bind",
+        "device": "/var/lib/docker/volumes/data"
+      },
+      "labels": {}
+    },
     "mountPoints": [
       {
         "sourceVolume": "data",
