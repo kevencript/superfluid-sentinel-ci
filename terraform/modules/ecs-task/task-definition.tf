@@ -13,7 +13,12 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     "memory": 2048,
     "name": "superfluid-sentinel",
     "networkMode": "awsvpc",
-    "portMappings": null
+    "portMappings": [
+      {
+        "containerPort": 0,
+        "hostPort": 0
+      }
+    ]
   }
 ]
 DEFINITION
