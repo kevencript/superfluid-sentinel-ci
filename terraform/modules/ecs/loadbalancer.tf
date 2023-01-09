@@ -1,50 +1,32 @@
-locals {
-  tags = {
-    "app:name"        = random_string.cluster.keepers.name
-    "app:environment" = random_string.cluster.keepers.environ
-  }
-}
+###############################
+## Application Load Balancer ##
+module "superfluid_alb" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "~> 5.9"
 
-resource "random_string" "cluster" {
-  length  = 8
-  lower   = false
-  special = false
+  count = var.create_load_balancer ? 1 : 0
 
-  keepers = {
-    name    = var.name
-    environ = var.environ
-  }
-}
+  name = "${substr(random_string.cluster.keepers.name, 0, 12)}-${substr(random_string.cluster.keepers.environ, 0, 12)}-${random_string.cluster.id}"
 
-#################
-## ECS Cluster ##
-resource "aws_ecs_cluster" "superfluid_ecs_cluster" {
-  name = "${random_string.cluster.keepers.name}-${random_string.cluster.keepers.environ}-${random_string.cluster.id}"
+  load_balancer_type = "application"
 
-  capacity_providers = var.capacity_providers
+  vpc_id          = var.vpc_id
+  subnets         = aws_subnet.public.*.id
+  security_groups = [module.superfluid_alb_security_group[0].this_security_group_id]
 
-  dynamic "default_capacity_provider_strategy" {
-    for_each = var.capacity_provider_strategies
+  target_groups = [{
+    target_type      = "ip"
+    backend_protocol = "HTTP"
+    backend_port     = 80
+  }]  
 
-    content {
-      capacity_provider = default_capacity_provider_strategy.value["capacity_provider"]
-      weight            = default_capacity_provider_strategy.value["weight"]
-      base              = default_capacity_provider_strategy.value["base"]
-    }
-  }
-
-  setting {
-    name  = "containerInsights"
-    value = var.enable_container_insights ? "enabled" : "disabled"
-  }
+  http_tcp_listeners = [{
+    port     = 80
+    protocol = "HTTP"
+  }]
 
   tags = merge(var.tags, local.tags)
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
-
 
 #####################
 ## Security Groups ##
@@ -90,5 +72,3 @@ module "superfluid_security_group" {
 
   tags = merge(var.tags, local.tags)
 }
-
-
