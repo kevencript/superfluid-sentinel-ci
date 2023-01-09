@@ -19,7 +19,7 @@ variable "alb_security_group" {
 }
 
 variable "alb_target_group_arn" {
-  type        = tuple
+  type        = list
   description = "ALB Target group ARN"
 }
 
