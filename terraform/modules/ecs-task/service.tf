@@ -6,7 +6,7 @@ resource "aws_ecs_service" "superfluid_sentinel_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = [module.superfluid_sentinel_task[0].this_security_group_id]
+    security_groups = module.superfluid_sentinel_task[0].this_security_group_id
     subnets         = data.aws_subnet_ids.superfluid.ids
   }
 
