@@ -23,9 +23,8 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-          "awslogs-group": "superfluid-sentinel-logs",
+          "awslogs-group": "/aws/ecs/superfluid-sentinel",
           "awslogs-region": "us-east-1",
-          "awslogs-create-group": "true",
           "awslogs-stream-prefix": "superfluid-sentinel"
       }
     },
