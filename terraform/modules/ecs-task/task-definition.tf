@@ -15,8 +15,8 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
 [
   {
     "image": "docker.io/gabrielobcosta/superfluid-sentinel:0.0.1",
-    "cpu": 1024,
-    "memory": 2048,
+    "cpu": 512,
+    "memory": 1000,
     "name": "superfluid-sentinel",
     "networkMode": "awsvpc",
     "essential": true,
