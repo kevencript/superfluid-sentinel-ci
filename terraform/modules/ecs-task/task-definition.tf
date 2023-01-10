@@ -1,3 +1,5 @@
+######################
+## Task Definiition ##
 resource "aws_ecs_task_definition" "superfluid_sentinel" {
   family                   = "${var.name}-definition"
   network_mode             = "awsvpc"
@@ -8,7 +10,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
   execution_role_arn = module.ecs_task_execution_role.arn
 
   volume {
-      name       = "data"
+      name = "data"
   }
 
  container_definitions = <<DEFINITION
