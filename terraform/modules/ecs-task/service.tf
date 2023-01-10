@@ -1,3 +1,5 @@
+#####################
+##   ECS Service   ##
 resource "aws_ecs_service" "superfluid_sentinel_service" {
   name            = "${var.name}-svc"
   cluster         = var.ecs_cluster_id
@@ -6,10 +8,11 @@ resource "aws_ecs_service" "superfluid_sentinel_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = [module.superfluid_sentinel_task.this_security_group_id]
+    security_groups = [module.superfluid_sentinel_task.this_security_group_id] # Change to ALB Security group if LB is enabled
     subnets         = data.aws_subnet_ids.superfluid.ids
   }
 
+  # OPTIONAL: If we want a LoadBalancer infrot of ECS image
   #load_balancer {
   #  target_group_arn = var.alb_target_group_arn[0]
   #  container_name   = var.name

@@ -1,3 +1,5 @@
+####################
+## Execution Role ##
 module "ecs_task_execution_role" {
   source = "dod-iac/ecs-task-execution-role/aws"
 
@@ -12,6 +14,9 @@ module "ecs_task_execution_role" {
   }
 }
 
+
+#############
+## Logging ##
 module "cloudwatch_kms_key" {
   source = "dod-iac/cloudwatch-kms-key/aws"
 

@@ -1,5 +1,8 @@
-###############################
-## Application Load Balancer ##
+###################################
+##   Application Load Balancer   ##
+##                               ##
+##  OBS: Extra module: Sentinel  ##
+##       do not expose any port  ##
 module "superfluid_alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 5.9"
