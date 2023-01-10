@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
  container_definitions = <<DEFINITION
 [
   {
-    "image": "docker.io/gabrielobcosta/superfluid-sentinel:0.0.1",
+    "image": "public.ecr.aws/i0x4j1n5/superfluid-sentinel:latest",
     "cpu": 1024,
     "memory": 2048,
     "name": "superfluid-sentinel",
