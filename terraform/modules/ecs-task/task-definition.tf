@@ -7,15 +7,6 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
 
   execution_role_arn = module.ecs_task_execution_role.arn
 
-  log_configuration {
-    log_driver = "awslogs"
-    options = {
-      "awslogs-group" = "${var.name}-log-group"
-      "awslogs-region" = "us-east-1"
-      "awslogs-stream-prefix" = "${var.name}-log-group"
-    }
-  }
-
   volume {
       name       = "data"
   }
@@ -29,6 +20,14 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     "name": "superfluid-sentinel",
     "networkMode": "awsvpc",
     "essential": true,
+    "log_configuration": {
+      "log_driver": "awslogs",
+      "options":  {
+        "awslogs-group" = "${var.name}-log-group"
+        "awslogs-region" = "us-east-1"
+        "awslogs-stream-prefix" = "${var.name}-log-group"
+      }
+    },
     "environment": [
       {
         "name": "NODE_ENV",
