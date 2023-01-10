@@ -3,7 +3,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 1024
-  memory                   = 7548
+  memory                   = 10048
 
   execution_role_arn = module.ecs_task_execution_role.arn
 
