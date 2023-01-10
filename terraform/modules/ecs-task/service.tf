@@ -6,15 +6,15 @@ resource "aws_ecs_service" "superfluid_sentinel_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = [aws_security_group.superfluid_sentinel_task.id]
+    security_groups = [module.superfluid_sentinel_task[0].this_security_group_id]
     subnets         = data.aws_subnet_ids.superfluid.ids
   }
 
-  #load_balancer {
-  #  target_group_arn = var.alb_target_group_arn[0]
-  #  container_name   = var.name
-  #  container_port   = var.port
-  #}
+  load_balancer {
+    target_group_arn = var.alb_target_group_arn[0]
+    container_name   = var.name
+    container_port   = var.port
+  }
 }
 
 data "aws_subnet_ids" "superfluid" {
