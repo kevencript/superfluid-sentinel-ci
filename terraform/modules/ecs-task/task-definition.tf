@@ -20,13 +20,13 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     "name": "superfluid-sentinel",
     "networkMode": "awsvpc",
     "essential": true,
-    "log_configuration": {
-      "log_driver": "awslogs",
-      "options":  {
-        "awslogs-group":"${var.name}-log-group",
-        "awslogs-region":"us-east-1",
-        "awslogs-create-group": true,
-        "awslogs-stream-prefix":"${var.name}-log-group"
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+          "awslogs-group": "superfluid-sentinel-logs",
+          "awslogs-region": "us-east-1",
+          "awslogs-create-group": "true",
+          "awslogs-stream-prefix": "superfluid-sentinel"
       }
     },
     "environment": [
