@@ -3,7 +3,7 @@ module "ecs_task_execution_role" {
 
   allow_ecr = true
   allow_create_log_groups    = true
-  cloudwatch_log_group_names = [module.cloudwatch_log_group.main.name]
+  cloudwatch_log_group_names = [module.aws_cloudwatch_log_group.main.name]
 
   name = format("app-%s-task-execution-role", var.name)
 
