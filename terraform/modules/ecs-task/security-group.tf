@@ -23,7 +23,6 @@ module "superfluid_sentinel_task" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.16"
 
-
   name        = "${var.name}-task-sg"
   description = "Access internet"
   vpc_id      = var.vpc_id
