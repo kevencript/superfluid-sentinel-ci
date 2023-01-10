@@ -13,15 +13,15 @@ variable "ecs_cluster_id" {
   description = "Cluster ID"
 }
 
-variable "alb_security_group" {
-  type        = string
-  description = "ALB security group"
-}
+# variable "alb_security_group" {
+#   type        = string
+#   description = "ALB security group"
+# }
 
-variable "alb_target_group_arn" {
-  type        = list
-  description = "ALB Target group ARN"
-}
+# variable "alb_target_group_arn" {
+#   type        = list
+#   description = "ALB Target group ARN"
+# }
 
 variable "port" {
   type        = string
