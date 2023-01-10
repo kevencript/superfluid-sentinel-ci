@@ -25,6 +25,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
       "options":  {
         "awslogs-group":"${var.name}-log-group"
         "awslogs-region":"us-east-1"
+        "awslogs-create-group": true,
         "awslogs-stream-prefix":"${var.name}-log-group"
       }
     },
