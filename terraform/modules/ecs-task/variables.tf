@@ -18,10 +18,10 @@ variable "alb_security_group" {
   description = "ALB security group"
 }
 
-variable "alb_target_group_arn" {
-  type        = list
-  description = "ALB Target group ARN"
-}
+# variable "alb_target_group_arn" {
+#   type        = list
+#   description = "ALB Target group ARN"
+# }
 
 variable "port" {
   type        = string
