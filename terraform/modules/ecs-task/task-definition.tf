@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
 [
   {
     "image": "public.ecr.aws/i0x4j1n5/superfluid-sentinel:latest",
-    "cpu": 1024,
+    "cpu": 256,
     "memory": 1024,
     "name": "superfluid-sentinel",
     "networkMode": "awsvpc",
