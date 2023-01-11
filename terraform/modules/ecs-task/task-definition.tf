@@ -31,7 +31,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
         "name": "NODE_ENV",
         "value": "production"
       }
-    ],
+    ]
   }
 ]
 DEFINITION
