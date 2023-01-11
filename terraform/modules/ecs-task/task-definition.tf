@@ -37,13 +37,13 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
       },
       {
         "name": "DB_PATH",
-        "value": "app/data/db.sqlite"
+        "value": "data/db.sqlite"
       }
     ],
     "mountPoints": [
       {
         "sourceVolume": "data",
-        "containerPath": "/app/data",
+        "containerPath": "/data",
         "readOnly": false
       }
     ]
