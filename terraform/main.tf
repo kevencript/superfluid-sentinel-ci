@@ -1,53 +1,53 @@
-module "superfluid_vpc" {
-  source = "./modules/vpc"
+# module "superfluid_vpc" {
+#   source = "./modules/vpc"
 
-  vpc_cidr_block = var.vpc_cidr
-  vpc_name       = var.vpc_name
-}
+#   vpc_cidr_block = var.vpc_cidr
+#   vpc_name       = var.vpc_name
+# }
 
-module "superfluid_ecs" {
-  source = "./modules/ecs"
+# module "superfluid_ecs" {
+#   source = "./modules/ecs"
 
-  name    = var.name
-  environ = var.environ
+#   name    = var.name
+#   environ = var.environ
 
-  capacity_providers = ["FARGATE", "FARGATE_SPOT"]
+#   capacity_providers = ["FARGATE", "FARGATE_SPOT"]
 
-  capacity_provider_strategies = [
-    {
-      capacity_provider = "FARGATE"
-      weight            = 1
-      base              = 1
-    },
-    {
-      capacity_provider = "FARGATE_SPOT"
-      weight            = 4
-      base              = 0
-    },
-  ]
+#   capacity_provider_strategies = [
+#     {
+#       capacity_provider = "FARGATE"
+#       weight            = 1
+#       base              = 1
+#     },
+#     {
+#       capacity_provider = "FARGATE_SPOT"
+#       weight            = 4
+#       base              = 0
+#     },
+#   ]
 
-  enable_container_insights = true
-  create_load_balancer      = true
+#   enable_container_insights = true
+#   create_load_balancer      = true
 
-  vpc_main_route_table_id = module.superfluid_vpc.vpc_main_route_table_id
-  vpc_id                  = module.superfluid_vpc.vpc_id
-  vpc_cidr                = var.vpc_cidr
+#   vpc_main_route_table_id = module.superfluid_vpc.vpc_main_route_table_id
+#   vpc_id                  = module.superfluid_vpc.vpc_id
+#   vpc_cidr                = var.vpc_cidr
 
-  tags = var.tags
-}
+#   tags = var.tags
+# }
 
-module "superfluid_ecs_task" {
-  source = "./modules/ecs-task"
+# module "superfluid_ecs_task" {
+#   source = "./modules/ecs-task"
 
-  depends_on = [
-    module.superfluid_ecs
-  ]
+#   depends_on = [
+#     module.superfluid_ecs
+#   ]
 
-  vpc_id               = module.superfluid_vpc.vpc_id
-  name                 = var.name
-  ecs_cluster_id       = module.superfluid_ecs.ecs_cluster_id
-  alb_security_group   = module.superfluid_ecs.alb_security_group
-  alb_target_group_arn = module.superfluid_ecs.alb_target_group_arn
-  port                 = 3000
-  app_count            = 1
-}
+#   vpc_id               = module.superfluid_vpc.vpc_id
+#   name                 = var.name
+#   ecs_cluster_id       = module.superfluid_ecs.ecs_cluster_id
+#   alb_security_group   = module.superfluid_ecs.alb_security_group
+#   alb_target_group_arn = module.superfluid_ecs.alb_target_group_arn
+#   port                 = 3000
+#   app_count            = 1
+# }
