@@ -8,7 +8,7 @@ resource "aws_ecs_service" "superfluid_sentinel_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = [module.superfluid_sentinel_task.this_security_group_id] # Change to ALB Security group if LB is enabled
+    security_groups = [module.superfluid_sentinel_task_sg.this_security_group_id] # Change to ALB Security group if LB is enabled
     subnets         = data.aws_subnet_ids.superfluid.ids
   }
 

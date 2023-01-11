@@ -1,6 +1,6 @@
 #####################
 ## Security Groups ##
-module "superfluid_sentinel_task" {
+module "superfluid_sentinel_task_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.16"
 
