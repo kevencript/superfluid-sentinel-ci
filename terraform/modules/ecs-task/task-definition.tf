@@ -9,10 +9,6 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
 
   execution_role_arn = module.ecs_task_execution_role.arn
 
-  volume {
-    name = "data"
-  }
-
  container_definitions = <<DEFINITION
 [
   {
@@ -34,19 +30,8 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
       {
         "name": "NODE_ENV",
         "value": "production"
-      },
-      {
-        "name": "DB_PATH",
-        "value": "data/db.sqlite"
       }
     ],
-    "mountPoints": [
-      {
-        "sourceVolume": "data",
-        "containerPath": "/data",
-        "readOnly": false
-      }
-    ]
   }
 ]
 DEFINITION
