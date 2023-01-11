@@ -10,7 +10,8 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
   execution_role_arn = module.ecs_task_execution_role.arn
 
   volume {
-      name = "data"
+    name = "data"
+    host_path = "/data"
   }
 
  container_definitions = <<DEFINITION
