@@ -11,7 +11,6 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
 
   volume {
     name = "data"
-    host_path = "data"
   }
 
  container_definitions = <<DEFINITION
@@ -38,7 +37,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
       },
       {
         "name": "DB_PATH",
-        "value": "data/db.sqlite"
+        "value": "app/data/db.sqlite"
       }
     ],
     "mountPoints": [
