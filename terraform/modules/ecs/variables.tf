@@ -49,13 +49,13 @@ variable "enable_container_insights" {
 
 variable "create_load_balancer" {
   type        = bool
-  default     = true
+  default     = false
   description = "(Optional) Whether to create an AWS ALB (Application Load Balancer) as part of the application"
 }
 
 variable "vpc_id" {
   type        = string
-  description = "(Optional) The VPC ID. It is required if \"create_load_balancer\" is \"true\"."
+  description = "The VPC ID"
 }
 
 data "aws_availability_zones" "available_zones" {
