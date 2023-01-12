@@ -9,7 +9,7 @@ in
     name = "superfluid-sentinel";
     config = {
       env = {
-        NODE_ENV = nodeEnv;
+        NODE_ENV = "production";
       };
       workingDir = "/app";
       buildCommand = 
