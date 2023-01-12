@@ -53,6 +53,13 @@ AWS_REGION
 AWS_ROLE
 ```
 
+## CI/CD Automation - Github Actions ~> Terraform ~> AWS
+
+We are using a S3 Bucket to store the tf.state. You can take a better look into the architecture bellow:
+
+<img src="https://media.cloudscalr.com/images/github-oidc-terraform/architecture1.png"  />
+> Open ID protocol with AWS Identity Provider
+
 ## Superfluid Sentinel ECR Image
 
 This solution is designed to read images from an Amazon Elastic Container Registry (Amazon ECR) and use it into the Task Definition. For this example, i deployed (not managed on this repo) the Superfluid Sentinel image to my own ECR repo and gave access for the ECS (security group for task execution role) access it
