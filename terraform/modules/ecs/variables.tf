@@ -49,7 +49,7 @@ variable "enable_container_insights" {
 
 variable "create_load_balancer" {
   type        = bool
-  default     = false
+  default     = true
   description = "(Optional) Whether to create an AWS ALB (Application Load Balancer) as part of the application"
 }
 
