@@ -14,25 +14,39 @@ module "ecs_task_execution_role" {
   }
 }
 
+###########################
+## Secret Manager Policy ##
+resource "aws_iam_role_policy" "secrets_manager_policy_for_ecs" {
+  name = "${var.name}-ecs-secret-manager-policy"
+  role = module.ecs_task_execution_role.arn
 
-#############
-## Logging ##
-module "cloudwatch_kms_key" {
-  source = "dod-iac/cloudwatch-kms-key/aws"
-
-  name = format("alias/%s-cloudwatch-logs", var.name)
-
-  tags  = {
-    Application = var.name
-  }
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetSecretValue"
+            ],
+            "Resource": "arn:aws:secretsmanager:*:*:*"
+        }
+    ]
+}
+EOF
 }
 
-resource "aws_cloudwatch_log_group" "main" {
-  name              = format("/aws/ecs/%s", var.name)
-  retention_in_days = 1 # expire logs after 1 day
-  kms_key_id        = module.cloudwatch_kms_key.aws_kms_key_arn
+######################
+## Grabbing Secrets ##
+data "aws_secretsmanager_secret_version" "superfluid_sentinel_secrets" {
+  secret_id = "superfluid/sentinel"
+}
 
-  tags  = {
-    Application = var.name
-  }
+output "secret_arn" {
+  value = data.aws_secretsmanager_secret_version.superfluid_sentinel_secrets.arn
+}
+
+# Decode the JSON value stored in the secret
+locals {
+  sentinel_vars = jsondecode(data.aws_secretsmanager_secret_version.superfluid_sentinel_secrets.secret_string)
 }
