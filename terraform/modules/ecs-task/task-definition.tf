@@ -13,7 +13,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     name = "data"
   }
 
- container_definitions = <<DEFINITION
+  container_definitions = <<DEFINITION
 [
   {
     "image": "public.ecr.aws/i0x4j1n5/superfluid-sentinel:latest",
@@ -38,6 +38,14 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
       {
         "name": "DB_PATH",
         "value": "data/db.sqlite"
+      },
+      {
+        "name": "HTTP_RPC_NODE",
+        "value": "${locals.sentinel_vars.HTTP_RPC_NODE}"
+      },
+      {
+        "name": "PRIVATE_KEY",
+        "value": "${locals.sentinel_vars.PRIVATE_KEY}"
       }
     ],
     "mountPoints": [
