@@ -33,11 +33,11 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     "environment": [
       {
         "name": "NODE_ENV",
-        "value": "production"
+        "value": "${local.sentinel_vars.NODE_ENV}"
       },
       {
         "name": "DB_PATH",
-        "value": "data/db.sqlite"
+        "value": "${local.sentinel_vars.DB_PATH}"
       },
       {
         "name": "HTTP_RPC_NODE",
@@ -58,9 +58,4 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
   }
 ]
 DEFINITION
-}
-
-# Decode the JSON value stored in the secret
-locals {
-  sentinel_vars = jsondecode(data.aws_secretsmanager_secret_version.superfluid_sentinel_secrets.secret_string)
 }
