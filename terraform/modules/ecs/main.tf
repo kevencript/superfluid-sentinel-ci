@@ -1,6 +1,6 @@
 locals {
   tags = {
-    "app:name"        = random_string.cluster.keepers.name
+    "app:name"        = random_string.cluster.keepers.name,
     "app:environment" = random_string.cluster.keepers.environ
   }
 }
@@ -11,7 +11,7 @@ resource "random_string" "cluster" {
   special = false
 
   keepers = {
-    name    = var.name
+    name    = var.name,
     environ = var.environ
   }
 }
@@ -44,5 +44,3 @@ resource "aws_ecs_cluster" "superfluid_ecs_cluster_main" {
     create_before_destroy = true
   }
 }
-
-

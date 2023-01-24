@@ -1,14 +1,14 @@
 module "superfluid_vpc" {
-  source            = "./modules/vpc"
-  vpc_cidr_block    = var.vpc_cidr
-  vpc_name          = var.vpc_name
+  source         = "./modules/vpc"
+  vpc_cidr_block = var.vpc_cidr
+  vpc_name       = var.vpc_name
 }
 
 module "superfluid_ecs" {
-  source                = "./modules/ecs"
-  name                  = var.name
-  environ               = var.environ
-  capacity_providers    = ["FARGATE", "FARGATE_SPOT"]
+  source             = "./modules/ecs"
+  name               = var.name
+  environ            = var.environ
+  capacity_providers = ["FARGATE", "FARGATE_SPOT"]
   capacity_provider_strategies = [
     {
       capacity_provider = "FARGATE"
@@ -30,12 +30,12 @@ module "superfluid_ecs" {
 
 module "superfluid_ecs_task" {
   source = "./modules/ecs-task"
-  
+
   depends_on = [module.superfluid_ecs]
 
-  vpc_id               = module.superfluid_vpc.vpc_id
-  name                 = var.name
-  ecs_cluster_id       = module.superfluid_ecs.ecs_cluster_id
-  port                 = 3000
-  app_count            = 1
+  vpc_id         = module.superfluid_vpc.vpc_id
+  name           = var.name
+  ecs_cluster_id = module.superfluid_ecs.ecs_cluster_id
+  port           = 3000
+  app_count      = 1
 }
