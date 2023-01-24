@@ -13,7 +13,7 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
     name = "data"
   }
 
- container_definitions = <<DEFINITION
+  container_definitions = <<DEFINITION
 [
   {
     "image": "public.ecr.aws/i0x4j1n5/superfluid-sentinel:latest",
@@ -38,6 +38,14 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
       {
         "name": "DB_PATH",
         "value": "data/db.sqlite"
+      },
+      {
+        "name": "HTTP_RPC_NODE",
+        "value": "${local.sentinel_vars.HTTP_RPC_NODE}"
+      },
+      {
+        "name": "PRIVATE_KEY",
+        "value": "${local.sentinel_vars.PRIVATE_KEY}"
       }
     ],
     "mountPoints": [
@@ -50,4 +58,9 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
   }
 ]
 DEFINITION
+}
+
+# Decode the JSON value stored in the secret
+locals {
+  sentinel_vars = jsondecode(data.aws_secretsmanager_secret_version.superfluid_sentinel_secrets.secret_string)
 }
