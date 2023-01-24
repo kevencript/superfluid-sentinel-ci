@@ -41,11 +41,11 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
       },
       {
         "name": "HTTP_RPC_NODE",
-        "value": "${locals.sentinel_vars.HTTP_RPC_NODE}"
+        "value": "${local.sentinel_vars.HTTP_RPC_NODE}"
       },
       {
         "name": "PRIVATE_KEY",
-        "value": "${locals.sentinel_vars.PRIVATE_KEY}"
+        "value": "${local.sentinel_vars.PRIVATE_KEY}"
       }
     ],
     "mountPoints": [
