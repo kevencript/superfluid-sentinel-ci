@@ -58,7 +58,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
     metric {
       namespace   = "ECS/ContainerInsights"
       metric_name = "RunningTaskCount"
-      period      = "10"
+      period      = "60"
       stat        = "Average"
 
       dimensions = {
