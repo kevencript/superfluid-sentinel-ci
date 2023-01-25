@@ -39,6 +39,10 @@ variable "ecs_cluster_name" {
   description = "ECS cluster name"
 }
 
+variable "ecs_service_name" {
+  description = "ECS service name"
+}
+
 
 variable "cloudwatch_notification_email" {
   description = "The e-mail in which will receive the notifications from CloudWatch"
