@@ -88,6 +88,20 @@ One of the most important things related to the Superfluid Sentinel is the Log v
 
 > Example of Superfluid Sentinel logs for Polygon Mainnet RPC
 
+
+## CloudWatch: Alarms and Notifications
+
+I also created a SNS (Amazon Simple Notification Service) topic to deliver notifications via e-mail. For it, we also have Metrics Alarms in order to compare metrics (on our case i created a Alarm to verify if we do have at least 1 running instance of Sentinel's image on our ECS Cluster) and generate data.
+
+![](https://i.imgur.com/zrE3VY3.png)
+> CloudWatch Alarm 
+
+And here we have an example of the sent e-mail:
+
+![](https://i.imgur.com/R4DZtgR.png)
+> Example of the AWS e-mail when our Sentinel's image is not "Running" into our ECS Cluster
+
+
 ## Application LoadBalancer (Optional - not included by default)
 
 This project also have a LoadBalancer module (in which is commented on terraform/modules/ecs/loadbalancer.tf)
