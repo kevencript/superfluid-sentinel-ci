@@ -47,7 +47,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
 
   metric_query {
     id          = "CustomQuery"
-    expression  = "SELECT Average(RunningTaskCount) FROM 'ECS/ContainerInsights' WHERE ClusterName = ${var.ecs_cluster_name}"
+    expression  = "SELECT Average(RunningTaskCount) FROM 'ECS/ContainerInsights' WHERE ClusterName = '${var.ecs_cluster_name}'"
     label       = "Running Tasks (Minimum is 1)"
     return_data = "true"
   }
