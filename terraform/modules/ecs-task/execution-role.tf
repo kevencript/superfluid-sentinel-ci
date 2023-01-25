@@ -13,25 +13,3 @@ module "ecs_task_execution_role" {
     Application = var.name
   }
 }
-
-###########################
-## Secret Manager Policy ##
-# resource "aws_iam_role_policy" "secrets_manager_policy_for_ecs" {
-#   name = "${var.name}-ecs-secret-manager-policy"
-#   role = module.ecs_task_execution_role
-
-#   policy = <<EOF
-# {
-#     "Version": "2012-10-17",
-#     "Statement": [
-#         {
-#             "Effect": "Allow",
-#             "Action": [
-#                 "secretsmanager:GetSecretValue"
-#             ],
-#             "Resource": "arn:aws:secretsmanager:*:*:*"
-#         }
-#     ]
-# }
-# EOF
-# }
