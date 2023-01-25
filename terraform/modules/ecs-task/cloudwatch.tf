@@ -63,7 +63,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
       unit        = "Count"
 
       dimensions = {
-        ServiceName = var.ecs_service_name
+        ServiceName = aws_ecs_service.superfluid_sentinel_service.name
         ClusterName = var.ecs_cluster_name
       }
     }
@@ -80,7 +80,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
       unit        = "Count"
 
       dimensions = {
-        ServiceName = var.ecs_service_name
+        ServiceName = aws_ecs_service.superfluid_sentinel_service.name
         ClusterName = var.ecs_cluster_name
       }
     }
