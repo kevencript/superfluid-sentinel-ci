@@ -33,6 +33,7 @@ I also created some other structures in which are not being managed on this repo
 │   │   └── ecs-task
 │   │       ├── execution-role.tf
 │   │       ├── security-group.tf
+│   │       ├── cloudwatch.tf
 │   │       ├── service.tf
 │   │       ├── variables.tf
 │   │       └── task-definition.tf
