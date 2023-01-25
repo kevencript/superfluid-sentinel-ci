@@ -46,10 +46,10 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
   alarm_actions       = [aws_sns_topic.superfluid_principal.arn]
 
   metric_query {
-    id         = "e1"
-    expression = "IF(m1 < 1)"
-    label      = "DesiredCountNotMet"
-
+    id          = "e1"
+    expression  = "IF(m1 < m2)"
+    label       = "DesiredCountNotMet"
+    return_data = "true"
   }
 
   metric_query {
