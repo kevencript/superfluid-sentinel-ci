@@ -47,7 +47,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
 
   metric_query {
     id          = "e1"
-    expression  = "IF(m1 < m2)"
+    expression  = "IF(m1 <= m2, 1, 0)"
     label       = "DesiredCountNotMet"
     return_data = "true"
   }
