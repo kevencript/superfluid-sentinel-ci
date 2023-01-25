@@ -39,8 +39,8 @@ resource "aws_sns_topic_subscription" "superfluid_principal_email" {
 ## Alarms  ##
 resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
   alarm_name          = "${var.name}-ecs-task-running-alarm"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "2"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "1"
   threshold           = 1
   alarm_description   = "Superfluid ECS CloudWatch Alarm to have sure that we have at minimum 1 Running task into the cluster"
   alarm_actions       = [aws_sns_topic.superfluid_principal.arn]
@@ -50,7 +50,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
     metric {
       metric_name = "TaskRunning"
       namespace   = "AWS/ECS"
-      period      = "60"
+      period      = "15"
       stat        = "SampleCount"
 
       dimensions = {
@@ -59,3 +59,5 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
     }
   }
 }
+
+
