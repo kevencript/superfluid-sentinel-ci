@@ -53,8 +53,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
   }
 
   metric_query {
-    id          = "m1"
-    return_data = "true"
+    id = "m1"
 
     metric {
       namespace   = "ECS/ContainerInsights"
