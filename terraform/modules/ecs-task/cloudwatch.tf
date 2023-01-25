@@ -44,7 +44,6 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
   threshold           = 1
   alarm_description   = "Superfluid ECS CloudWatch Alarm to have sure that we have at minimum 1 Running task into the cluster"
   alarm_actions       = [aws_sns_topic.superfluid_principal.arn]
-  period              = "10"
 
   metric_query {
     id          = "e1"
