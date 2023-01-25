@@ -50,7 +50,6 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
   dimensions = {
     ClusterName = var.ecs_cluster_name
   }
-  return_data   = "true"
   alarm_actions = [aws_sns_topic.superfluid_principal.arn]
 
 }
