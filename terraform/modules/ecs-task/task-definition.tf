@@ -4,8 +4,8 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
   family                   = "${var.name}-definition"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = 256
-  memory                   = 1024
+  cpu                      = 128
+  memory                   = 512
 
   execution_role_arn = module.ecs_task_execution_role.arn
 
@@ -17,8 +17,8 @@ resource "aws_ecs_task_definition" "superfluid_sentinel" {
 [
   {
     "image": "public.ecr.aws/i0x4j1n5/superfluid-sentinel:latest",
-    "cpu": 256,
-    "memory": 1024,
+    "cpu": 128,
+    "memory": 512,
     "name": "superfluid-sentinel",
     "networkMode": "awsvpc",
     "essential": true,

@@ -50,7 +50,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
     metric {
       metric_name = "TaskRunning"
       namespace   = "AWS/ECS"
-      period      = "15"
+      period      = "10"
       stat        = "SampleCount"
 
       dimensions = {
