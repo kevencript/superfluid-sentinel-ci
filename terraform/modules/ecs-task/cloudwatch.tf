@@ -46,10 +46,26 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
   alarm_actions       = [aws_sns_topic.superfluid_principal.arn]
 
   metric_query {
-    id          = "e1"
+    id          = "CustomQuery"
     expression  = "SELECT Average(RunningTaskCount) FROM 'ECS/ContainerInsights' WHERE ClusterName = ${var.ecs_cluster_name}"
     label       = "Running Tasks (Minimum is 1)"
     return_data = "true"
+  }
+
+  metric_query {
+    id          = "m1"
+    return_data = "true"
+
+    metric {
+      namespace   = "ECS/ContainerInsights"
+      metric_name = "RunningTaskCount"
+      period      = "10"
+      stat        = "Average"
+
+      dimensions = {
+        ClusterName = var.ecs_cluster_name
+      }
+    }
   }
 }
 
