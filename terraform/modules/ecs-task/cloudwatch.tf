@@ -46,7 +46,9 @@ resource "aws_cloudwatch_metric_alarm" "ecs_task_running" {
   alarm_actions       = [aws_sns_topic.superfluid_principal.arn]
 
   metric_query {
-    id = "TaskRunning"
+    id          = "TaskRunning"
+    return_data = "true"
+
     metric {
       metric_name = "TaskRunning"
       namespace   = "AWS/ECS"
