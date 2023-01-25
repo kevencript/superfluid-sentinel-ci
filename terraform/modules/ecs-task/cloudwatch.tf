@@ -24,15 +24,15 @@ resource "aws_cloudwatch_log_group" "main" {
 ## Notifications ##
 resource "aws_sns_topic" "superfluid_principal" {
   name = "${var.name}-notification"
+  tags = {
+    ClusterName = var.ecs_cluster_name
+  }
 }
 
 resource "aws_sns_topic_subscription" "superfluid_principal_email" {
   topic_arn = aws_sns_topic.superfluid_principal.arn
   protocol  = "email"
   endpoint  = var.cloudwatch_notification_email
-  tags = {
-    ClusterName = var.ecs_cluster_name
-  }
 }
 
 #############
