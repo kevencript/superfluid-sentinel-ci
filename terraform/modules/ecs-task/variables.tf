@@ -34,3 +34,12 @@ variable "app_count" {
   description = "Port"
   default     = 2
 }
+
+variable "ecs_cluster_name" {
+  description = "ECS cluster name"
+}
+
+
+variable "cloudwatch_notification_email" {
+  description = "The e-mail in which will receive the notifications from CloudWatch"
+}

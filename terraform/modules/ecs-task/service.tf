@@ -4,7 +4,7 @@ resource "aws_ecs_service" "superfluid_sentinel_service" {
   name            = "${var.name}-svc"
   cluster         = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.superfluid_sentinel.arn
-  desired_count   = var.app_count 
+  desired_count   = var.app_count
   launch_type     = "FARGATE"
 
   network_configuration {
