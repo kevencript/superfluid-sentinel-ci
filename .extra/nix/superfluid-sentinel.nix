@@ -9,7 +9,7 @@ in
     name = "superfluid-sentinel";
     config = {
       env = {
-        NODE_ENV = "production";
+        NODE_ENV = nodeEnv;
       };
       workingDir = "/app";
       buildCommand = 
@@ -29,7 +29,7 @@ in
         apk add --no-cache ${tini}
         '';
       entrypoint = [ "/sbin/tini" "--" ];
-      cmd = [ "${pkgs.nodejs}/bin/node" "main.js" ];
+      cmd = [ nodeImage "main.js" ];
     };
     config.image = nodeImage;
   }
